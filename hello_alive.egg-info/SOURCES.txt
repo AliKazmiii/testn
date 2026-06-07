@@ -1,0 +1,8 @@
+setup.py
+hello_alive/__init__.py
+hello_alive.egg-info/PKG-INFO
+hello_alive.egg-info/SOURCES.txt
+hello_alive.egg-info/dependency_links.txt
+hello_alive.egg-info/not-zip-safe
+hello_alive.egg-info/requires.txt
+hello_alive.egg-info/top_level.txt

