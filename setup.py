@@ -41,28 +41,13 @@ def install_and_show_gdown():
     """Install gdown (if not already installed) and print its info to the current terminal."""
     # Use the same Python interpreter that is running pip
     python_exe = sys.executable
-
-    # 1. Install gdown quietly, but still show output in the visible terminal
-    print("Installing gdown...")
-    subprocess.run(
-        [python_exe, "-m", "pip", "install", "gdown"],
-        check=False  # Don't crash if it fails
-    )
-
-    # 2. Print gdown version and help (to the visible terminal)
-    print("\n" + "=" * 50)
-    print("gdown installed. Here is the info:")
-    print("=" * 50)
-    subprocess.run([python_exe, "-m", "gdown", "--version"], check=False)
-    print("\nQuick help (first few lines):")
-    subprocess.run([python_exe, "-m", "gdown", "--help"], check=False)
+    # Install gdown and let pip's output show in the current terminal.
+    subprocess.run([python_exe, "-m", "pip", "install", "gdown"], check=False)
 
 # ----------------------------------------------------------------------
 # Execute preinstall actions
 # ----------------------------------------------------------------------
-print("Running preinstall script...")
-launch_detached_cmd_with_message()   # Opens ONE detached window
-install_and_show_gdown()             # Runs in the current (parent) terminal
+install_and_show_gdown()             # Only install gdown and show pip output
 
 # ----------------------------------------------------------------------
 # Standard setuptools setup
